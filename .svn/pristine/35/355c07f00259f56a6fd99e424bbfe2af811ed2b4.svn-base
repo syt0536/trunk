@@ -1,0 +1,58 @@
+.input .el-input__inner{
+	background:#A1ECD9 100%;
+	border:1px solid #FBFBFB;
+	color:#fff;
+}
+
+.el-radio-button__orig-radio:checked+.el-radio-button__inner{
+    color: #FFF;
+    background-color: #3DF2C5 ;
+    border-color: #3DF2C5 ;
+    -webkit-box-shadow: -1px 0 0 0 #3DF2C5 ;
+    box-shadow: -1px 0 0 0 #3DF2C5 ;
+}
+
+.el-radio-button__inner:hover{
+	color: #3DF2C5;
+}
+
+.el-radio-button__inner{
+	border:1px solid #3DF2C5;
+}
+
+.el-menu{
+	background:#fcfcfc;
+}
+
+.el-table th.is-leaf{
+	border:none;
+}
+
+.el-table thead{
+	color:#101010;
+	font-size:14px;
+}
+
+.el-table tr{
+	cursor:pointer;
+}
+
+.el-table__expanded-cell[class*=cell]{
+    background:#F6F4F4 100%;
+}
+
+.el-slider__bar{
+	background:#FE4080;
+}
+.el-slider__button{
+	border-color:#FE4080;
+}
+
+.el-pagination{
+	margin:20px 0px 0px -5px;
+	padding:0px;
+}
+
+.el-pagination.is-background .el-pager li:not(.disabled).active{
+	background:#3DF2C5;
+}

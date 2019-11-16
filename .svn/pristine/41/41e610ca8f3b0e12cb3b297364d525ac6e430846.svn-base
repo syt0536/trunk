@@ -1,0 +1,141 @@
+<template>
+  <div>
+    <div class="searchResult">
+      <ChildBanner></ChildBanner>
+      <div class='content'>
+        <p style='height:20px;font-size:20px;'>Showing 10 of 60 availiable item</p>
+       <el-table
+    :data="tableData" style='margin-top:30px' header-row-style='height:23px color:black'
+    >
+    <el-table-column type="expand" style='margin-top:30px'>
+      <template slot-scope="props">
+        <el-form label-position="left" inline class="demo-table-expand" style='height:23px;font-size:23px;'>
+          <el-form-item label="Company">
+            <span>{{ props.row.Company }}</span>
+          </el-form-item>
+          <el-form-item label="Active Indication">
+            <span>{{ props.row.shopId }}</span>
+          </el-form-item>
+          <el-form-item label="Indication">
+            <span>{{ props.row.Indication }}</span>
+          </el-form-item>
+
+    <a href="" target="_blank" class="buttonText">1</a>
+
+
+        </el-form>
+      </template>
+    </el-table-column>
+    <el-table-column 
+    label=" "
+      type="index">
+    </el-table-column>
+    <el-table-column
+      label="DrugName"
+      prop="DrugName">
+    </el-table-column>
+    <el-table-column
+      label="Indication"
+      prop="Indication">
+    </el-table-column>
+    <el-table-column
+      label="Target"
+      prop="Target">
+    </el-table-column>
+        <el-table-column
+      label="Intervention"
+      prop="Intervention">
+    </el-table-column>
+        <el-table-column
+      label="Status"
+      prop="Status">
+    </el-table-column>
+    
+  </el-table>
+  <!-- <div class="block">
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page.sync="currentPage3"
+      :page-size="100"
+      layout="prev, pager, next, jumper"
+      :total="1000">
+    </el-pagination>
+  </div> -->
+    </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  import ChildBanner from '@/components/ChildBanner'
+  export default {
+    name: "SearchResult",
+    components:{
+      ChildBanner
+    },
+    data() {
+      return {
+        tableData: [{
+          DrugName: '1',
+          Indication: '1',
+          Target: '1',
+          Intervention: '1',
+          Status: '1',
+          Company: '1',
+          shopId: '1',
+          Paper: '1'
+        }, {
+          DrugName: '1',
+          Indication: '1',
+          Target: '1',
+          Intervention: '1',
+          Status: '1',
+          Company: '1',
+          shopId: '1'
+        },{
+          DrugName: '1',
+          Indication: '1',
+          Target: '1',
+          Intervention: '1',
+          Status: '1',
+          Company: '1',
+          shopId: '1'
+        },{
+          DrugName: '1',
+          Indication: '1',
+          Target: '1',
+          Intervention: '1',
+          Status: '1',
+          Company: '1',
+          shopId: '1'
+        }]
+      }
+
+      
+    },
+    mounted() {
+      
+    }
+  }
+</script>
+
+<style scoped lang="scss">
+.content{
+  margin-top:40px;
+  margin-left:224px;
+  width:979px;
+  
+}
+.block{
+  margin-top: 40px;
+  margin-left:500px;
+
+}
+.el-table {
+ font-size:17px;color:#101010;
+}
+.el-table-row{
+  height: 40px;
+}
+</style>

@@ -1,0 +1,46 @@
+<template>
+  <div class="jsme" id='jsme_container'>
+   
+  </div>
+</template>
+<script type="text/javascript" language="javascript" src="jsme/jsme.nocache.js"></script>
+<script>
+//   import JSApplet from '../../src/assets/jsme/jsme.nocache.js'
+  export default {
+    name: "Jsme",
+    components:{
+    },
+    data() {
+      return {
+          
+        
+      }
+    },
+    mounted() {
+      
+      applet = new JSApplet.JSME('jsme_container','380px','340px')
+    
+    },
+    methods: {
+//          readMolString(molString) {
+//     // this.applet.readGenericMolecularInput(molString);
+//   }
+    }
+  }
+</script>
+
+<style scoped lang="scss">
+  .footer{
+    width:100%;
+    height:40px;
+    line-height:40px;
+    background:#000106 100%;
+    text-align:center;
+    color:#666;
+    font-size:12px;
+    position:fixed;
+    bottom: 0px;
+    left:0px;
+    z-index:999;
+  }
+</style>

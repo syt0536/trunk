@@ -1,0 +1,58 @@
+<template>
+  <div>
+    <div class="moleculeStucture">
+      <ChildBanner></ChildBanner>
+      <!-- 分子搜索页面 -->
+    </div>
+    <div class='content'>
+      <div style='width:600px;height:500px;background-color:green;margin-left:200px;float:left;'>
+        <Jsme></Jsme>
+      </div>
+      <div class='right' style='margin-right:150px;float:right;width:335px'>
+      <p style='height:30px;margin-bottom:20px;font-size:25px;'>Structure Type</p>
+      <template>
+        <el-radio v-model="radio" label="1" style='height:30px;margin-bottom:50px;font-size:21px;'>Structure</el-radio>
+        <el-radio v-model="radio" label="2" style='height:30px;margin-bottom:50px;font-size:21px;'>Substructure</el-radio>
+      </template>
+      <div class="block">
+        <p class="demonstration"  style='height:30px;margin-bottom:20px;'>Tanimoto threshold: {{value}}</p>
+        <el-slider v-model="value" :step='0.01'
+      :max="1" style='width:335pxpx;margin-bottom:20px;background-color:white'>></el-slider>
+      </div>
+      <el-button style="background-color:#3DF2C5;color:white;width:335px" >search</el-button>  
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  import ChildBanner from '@/components/ChildBanner'
+  import Jsme from '@/components/Jsme'
+  export default {
+    name: "MoleculeStucture",
+    components:{
+      ChildBanner,
+      Jsme
+    },
+    data() {
+      return {
+        radio:'1',
+        value:[0,1]
+      }
+    },
+    // methods:{
+    //   changeV(value){
+    //     console.log(value)
+    //   }
+    // },
+    mounted() {
+      
+    }
+  }
+</script>
+
+<style scoped lang="scss">
+.content{
+  margin-top: 120px;
+}
+</style>

@@ -1,0 +1,141 @@
+<template>
+	<div class="header">
+		<el-menu 
+			:default-active="activeIndex" 
+			class="el-menu-demo" 
+			mode="horizontal" 
+			@select="handleSelect"
+		>
+		  <div v-for="(item , k) in menu" :key="k">
+			  <el-menu-item index="`${k}`" v-if="!item.children">
+					<router-link :to="`${item.url}`">
+						<span>{{item.name}}</span>
+					</router-link>
+			  </el-menu-item>
+			  <el-submenu index="`${k}`"  v-else>
+			    <template slot="title">{{item.name}}</template>
+			    <el-menu-item index="`${k}-${index}`" v-for="(value , index) in item.children" :key="index">
+			    	<router-link :to="`${value.url}`">
+						<span>{{value.name}}</span>
+					</router-link>
+			    </el-menu-item>
+			  </el-submenu>
+		  </div>
+		</el-menu>
+	</div>
+</template>
+<script>
+	export default {
+		props:{
+			
+		},
+		data(){
+			return {
+				activeIndex:'0',
+				menu:[{
+					name: 'HOME',
+					url: '/home'
+				},{
+					name: 'SEVICE PROJECT',
+					children:[{
+						name:'Virtual screening of specific protein targets, optimization of seed compounds and molecular docking',
+						url:'/service'
+					},{
+						name:'Use the multistage virtual screening method developed in the laboratory (with high accuracy) to conduct drug screening and design',
+						url:'/service'
+					},{
+						name:'Homologous modeling of proteins',
+						url:'/service'
+					},{
+						name:'Docking of peptide and protein target',
+						url:'/service'
+					},{
+						name:'Design and modification of new enzyme',
+						url:'/service'
+					},{
+						name:'Molecular dynamics simulation and trajectory analysis of complex biological systems.',
+						url:'/service'
+					},{
+						name:'Calculation of transition state of small molecule reaction and enzyme reaction.',
+						url:'/service'
+					},{
+						name:' Prediction of small molecular targets (especially prediction of natural product molecules)',
+						url:'/service'
+					},{
+						name:'Customized relevant databases.',
+						url:'/service'
+					},{
+						name:' Network pharmacology analysis of traditional Chinese medicine.',
+						url:'/service'
+					}]
+				},{
+					name: 'CONTECT',
+					url: '/contect'
+				},{
+					name: 'LOGIN IN',
+					url: '/login'
+				}]
+			}
+		},
+		methods:{
+			handleSelect(key, keyPath) {
+		        console.log(key, keyPath);
+		    }
+		}
+	}
+</script>
+<style scoped lang="scss">
+
+	.header{
+		width:100%;
+		color:#3DF2C5;
+		font-size:20px;
+		text-align: center;
+		min-width:1024px;
+		padding:15px 10% 0px 10%;
+		overflow:hidden;
+		ul{
+			border:none;
+			div{
+				li{
+					font-size:20px;
+					color:#3DF2C5;
+				}
+			}
+		}
+		div{
+			margin-right:29px;
+			float:left;
+			display:inline;
+			color:#3DF2C5;
+			li{
+				cursor:pointer;
+				a{
+					color:#3DF2C5;
+				}
+				div{
+					color:#3DF2C5;
+				}
+				&:hover{
+						color:#A1ECD9;
+					a, div{
+						color:#A1ECD9;
+					}
+					div{
+						color:#A1ECD9;
+					}
+				}
+			}
+			&:last-child{
+				margin-right:0px;
+				float:right;
+				display:inline;
+			}
+			
+		}
+		.floatRight{
+			float:right;
+			display:inline;
+		}
+	}
+</style>

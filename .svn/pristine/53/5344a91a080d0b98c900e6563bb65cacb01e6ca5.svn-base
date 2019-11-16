@@ -1,0 +1,100 @@
+<template>
+  <div>
+    <div class="moleculeStucture">
+      <ChildBanner></ChildBanner>
+      <!-- 分子搜索页面 -->
+      <div class='content width70'>
+        <div id="jsme_container" code="JME.class" name="JME"  archive='JME.jar' codebase='.' width='360' height='315'></div>
+
+        <div class='right'>
+          <p class="title">Structure Type</p>
+          <template>
+            <el-radio v-model="radio" label="Structure" class="radioStyle">Structure</el-radio>
+            <el-radio v-model="radio" label="Substructure" class="radioStyle">Substructure</el-radio>
+          </template>
+          <div class="block">
+            <p class="demonstration numStyle">Tanimoto threshold: {{value}}</p>
+            <el-slider v-model="value" :step='0.01' :max="1" style='margin-bottom:20px;'>></el-slider>
+            <el-button class="buttonStyle" @click="search">search</el-button>  
+          </div>
+        </div>
+
+      </div>
+    </div>  
+  </div>
+</template>
+
+<script>
+  import ChildBanner from '@/components/ChildBanner'
+  export default {
+    name: "MoleculeStucture",
+    components:{
+      ChildBanner
+    },
+    data() {
+      return {
+        radio:'Structure',
+        value:0.6,
+        jsmeApplet:''
+      }
+    },
+    methods:{
+      search(){
+        var drawing = document.JME.smiles();
+        var jme = document.JME.jmeFile();
+        var mol = document.JME.molFile();
+        console.log(drawing, this.radio, this.value)
+        this.$router.push({path:'/moleculeStuctureDe',query:{id:drawing,id1:this.radio,id2:this.value}})
+      },
+      jsmeOnLoad() {
+        this.jsmeApplet = new JSApplet.JSME("jsme_container", "380px", "340px", {
+           "options" : "oldlook,star"
+        });
+        document.JME = this.jsmeApplet;
+      }
+    },
+    mounted() {
+      this.jsmeOnLoad()
+    }
+  }
+</script>
+
+<style scoped lang="scss">
+.moleculeStucture{
+  .width70{
+      width: 70%;
+      margin: 0 auto;
+  }
+  .content{
+    margin-top:40px;
+    display:flex;
+    justify-content: space-evenly;
+  }
+
+  .radioStyle{
+    height:30px;
+    margin-bottom:30px;
+    font-size:21px;
+    font-weight:bold;
+  }
+
+  .title{
+    height:30px;
+    margin-bottom:20px;
+    font-size:25px;
+  }
+
+  .buttonStyle{
+    background-color:#3DF2C5;
+    color:white;
+    width:335px
+  }
+
+  .numStyle{
+    height:30px;
+    margin-bottom:20px;
+  }
+
+}
+
+</style>

@@ -1,0 +1,126 @@
+<template>
+  <div class="childTable">
+    <div class="childTip">Showing 10 of 60 availiable item</div>
+        <el-table 
+          :data="data" 
+          row-key="index"
+          :expand-row-keys="expands"
+          @row-click="rowClick"
+          class="tableBox"
+        >
+          <el-table-column type="expand">
+            <template slot-scope="props">
+              <el-table-column type="expand">
+                <el-form :inline="true" class="demo-form-inline">
+                  <el-form-item label="Company:">
+                    {{ props.row.Company }}
+                  </el-form-item>
+                  <el-form-item label="Active Indication:">
+                    {{ props.row.shopId }}
+                  </el-form-item>
+                  <el-form-item label="Indication:">
+                    {{ props.row.Indication }}
+                  </el-form-item >
+                  <el-form-item  class="buttonText">
+                    <!-- <a href="" target="_blank">Paper</a> -->
+                    <a href="###">Paper</a>
+                  </el-form-item >
+                </el-form>
+              </el-table-column>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="index"
+            width="60px"
+            align="center"
+            label="">
+          </el-table-column>
+          <el-table-column label="DrugName" prop="DrugName">
+          </el-table-column>
+          <el-table-column label="Indication" prop="Indication">
+          </el-table-column>
+          <el-table-column label="Target" prop="Target">
+          </el-table-column>
+          <el-table-column label="Intervention" prop="Intervention">
+          </el-table-column>
+          <el-table-column label="Status" prop="Status">
+          </el-table-column>
+        </el-table>
+        <el-pagination
+          background
+          @current-change="handleCurrentChange"
+          layout="prev, pager, next"
+          :total="total">
+        </el-pagination>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: "Childtable",
+    components:{
+    },
+    props:{
+      data:{
+        type:Array,
+        default: []
+      },
+      total:{
+        type:Number,
+        default: 0
+      }
+    },
+    data() {
+      return {
+        expands: []
+      }
+    },
+    mounted() {
+      
+    },
+    methods: {
+      rowClick(row, event, column) {
+        Array.prototype.remove = function (val) {
+            let index = this.indexOf(val);
+            if (index > -1) {
+                this.splice(index, 1);
+            }
+        };
+
+        if (this.expands.indexOf(row.index) < 0) {
+            this.expands.push(row.index);
+        } else {
+            this.expands.remove(row.index);
+        }
+
+      },
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
+      }
+    }
+  }
+</script>
+
+<style scoped lang="scss">
+.childTable{
+  .el-form-item{
+    margin-bottom:0px;
+    margin-right: 50px;
+  }
+  .buttonText{
+    float:right;
+    display:inline;
+    a{
+      color:#2EA6F6;
+    }
+  }
+  .childTip{
+    color:#101010;
+    font-size:14px;
+    margin-top:50px;
+  }
+  .tableBox{
+    margin-top:20px;
+  }
+}
+</style>

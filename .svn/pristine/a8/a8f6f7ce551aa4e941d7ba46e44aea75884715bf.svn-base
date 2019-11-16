@@ -1,0 +1,57 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+import Home from '@/page/Home'
+import Login from '@/page/Login'
+import Contect from '@/page/Contect'
+import Service from '@/page/Service'
+import StatisticalChart from '@/page/StatisticalChart'
+import MoleculeStucture from '@/page/MoleculeStucture'
+import SearchResult from '@/page/SearchResult'
+import ClinicalResult from '@/page/ClinicalResult'
+
+Vue.use(Router)
+
+export default new Router({
+  routes: [
+    {
+		path: '/',
+		name: 'Home',
+		component: Home
+    },{
+		path: '/home',
+		name: 'Home',
+		component: Home
+    },{
+		path: '/login',
+		name: 'Login',
+		component: Login
+    },{
+		path: '/contect',
+		name: 'Contect',
+		component: Contect
+    },{
+		path: '/service',
+		name: 'Service',
+		component: Service
+    },{
+		path: '/statisticalChart',
+		name: 'StatisticalChart',
+		component: StatisticalChart
+    },{
+		path: '/moleculeStucture',
+		name: 'MoleculeStucture',
+		component: MoleculeStucture
+    },{
+		path: '/searchResult',
+		name: 'SearchResult',
+		component: SearchResult
+    },{
+		path: '/clinicalResult',
+		name: 'ClinicalResult',
+		component: ClinicalResult
+    },{ 
+    	path: '*', 
+    	redirect: '/home' 
+	}
+  ]
+})

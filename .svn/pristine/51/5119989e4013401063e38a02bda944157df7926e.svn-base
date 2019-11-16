@@ -1,0 +1,175 @@
+<template>
+  <div>
+    <div class="statisticalChart">
+      <ChildBanner></ChildBanner>
+      <!-- 图形搜索页面 -->
+      <div v-if="!show" class="childTip">Showing chart</div>
+      <div v-if="!show" class="charts" id="myChart" :style="{ height: '400px'}"></div>
+      <div v-if="!show" class="charts" id="myChart1" :style="{ height: '400px'}"></div>
+      
+      <div v-if="show" class="width70">
+        <a class="returnChart" @click="returnChart">return chart</a>
+        <Childtable :data="tableData" :total="total"></Childtable>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  import ChildBanner from '@/components/ChildBanner'
+  import Childtable from '@/components/Childtable'
+  export default {
+    name: "StatisticalChart",
+    components:{
+      ChildBanner,
+      Childtable
+    },
+    data() {
+      return {
+        show: false,
+        tableData: [],
+        total:50,
+        data1:{
+          xaxis:["a","b","c","d","e","f"],
+          datas:[5, 20, 36, 10, 10, 20]
+        },
+        data2:{
+          datas:[5, 20, 36, 10, 10, 20, 10, 10, 20]
+        }
+      }
+    },
+    mounted() {
+      this.drawLine();
+    },
+    methods: {
+      drawLine(){
+        // 基于准备好的dom，初始化echarts实例
+        let myChart = this.$echarts.init(document.getElementById('myChart'));
+        let myChart1 = this.$echarts.init(document.getElementById('myChart1'));
+        // 绘制图表
+        myChart.setOption({
+            "title": {
+                "text": "靶点分布",
+                "subtext": "与hiv相关的药物个数",
+                x: "4%",
+
+                textStyle: {
+                    color: '#000',
+                    fontSize: '18'
+                },
+                subtextStyle: {
+                    color: '#90979c',
+                    fontSize: '12',
+
+                },
+            },
+            tooltip: {},
+            xAxis: {
+                data: this.data1.xaxis,
+                type : 'category',
+                axisTick: {
+                    alignWithLabel: true
+                },
+                axisLabel: {
+                    interval:0 
+                }
+            },
+            yAxis: {},
+            series: [{
+                name: '药物个数',
+                type: 'bar',
+                data: this.data1.datas
+            }]
+        });
+
+        const _this = this;
+
+        myChart.on('click', function (params) {
+            if (params.componentType === 'series') {
+              _this.show = true;
+            }
+        });
+
+        myChart1.setOption({
+            "title": {
+                "text": "药物临床分布",
+                "subtext": "与hiv相关的药物个数",
+                x: "4%",
+
+                textStyle: {
+                    color: '#000',
+                    fontSize: '18'
+                },
+                subtextStyle: {
+                    color: '#90979c',
+                    fontSize: '12',
+
+                },
+            },
+            tooltip: {},
+            xAxis: {
+                data: ["N/A","null","Phase 1","Phase 2","Phase 3","Phase 4","Phase 1/Phase 2","Phase 2/Phase 3","Early Phase 1"],
+                type : 'category',
+                axisTick: {
+                    alignWithLabel: true
+                },
+                axisLabel: {
+                    interval:0 
+                }
+            },
+            yAxis: {},
+            series: [{
+                name: '药物个数',
+                type: 'bar',
+                data: this.data2.datas
+            }]
+        });
+
+        myChart1.on('click', function (params) {
+            if (params.componentType === 'series') {
+              _this.show = true;
+            }
+        });
+      },
+      returnChart(){
+        this.show = false;
+        this.$nextTick(() => {
+          this.drawLine();
+        })
+        
+      }
+    }
+  }
+</script>
+
+<style scoped lang="scss">
+.statisticalChart{
+  position:relative;
+  .childTip{
+    color:#101010;
+    font-size:14px;
+    width: 70%;
+    margin: 0 auto;
+    margin-top:50px;
+  }
+  .width70{
+    width: 70%;
+    margin: 0 auto;
+  }
+  .returnChart{
+    position: absolute;
+    right: 15%;
+    color: #3DF2C5 ;
+    text-decoration: underline;
+    cursor:pointer;
+  }
+}
+.charts{
+  width: 70%;
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px;
+  margin-top:20px;
+  border-bottom:1px solid #dcdcdc;
+}
+</style>

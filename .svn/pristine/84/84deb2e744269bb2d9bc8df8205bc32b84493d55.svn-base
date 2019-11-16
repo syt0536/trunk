@@ -1,0 +1,145 @@
+<template>
+  <div>
+    <div class="clinicalResult">
+      <ChildBanner></ChildBanner>
+      <!-- 临床搜索页面 -->
+      <div class="childTip width70">Showing 10 of 60 available items</div>
+      <el-radio-group v-model="tabPosition" class="clinicaltab width70" @change="tabClick">
+        <el-radio-button label="Early_Phase1">Early Phase1</el-radio-button>
+        <el-radio-button label="Phase1">Phase1</el-radio-button>
+        <el-radio-button label="Phase2">Phase2</el-radio-button>
+        <el-radio-button label="Phase3">Phase3</el-radio-button>
+        <el-radio-button label="Phase4">Phase4</el-radio-button>
+        <el-radio-button label="no_app_licable">Not App licable</el-radio-button>
+      </el-radio-group>
+      <div class="clinicalBox width70">
+        <el-table
+          :data="tableData"
+          style="width: 100%">
+          <el-table-column
+            prop="index"
+            width="60px"
+            align="center"
+            label="">
+          </el-table-column>
+          <el-table-column
+            prop="phase"
+            label="Phase">
+          </el-table-column>
+          <el-table-column
+            prop="title"
+            label="Title">
+          </el-table-column>
+          <el-table-column
+            prop="status"
+            label="Status">
+          </el-table-column>
+          <el-table-column
+            prop="intervention"
+            label="Intervention">
+          </el-table-column>
+          <el-table-column
+            prop="location"
+            label="Location">
+          </el-table-column>
+          <el-table-column
+            prop="indication"
+            label="Indication">
+          </el-table-column>
+
+        </el-table>
+        <el-pagination
+          background
+          @current-change="handleCurrentChange"
+          layout="prev, pager, next"
+          :total="total">
+        </el-pagination>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  import ChildBanner from '@/components/ChildBanner'
+  export default {
+    name: "ClinicalResult",
+    components:{
+      ChildBanner
+    },
+    data() {
+      return {
+        tabPosition: 'Early_Phase1',
+        total:50,
+        tableData: [{
+          index: '1.',
+          phase: 'phase',
+          title: 'title',
+          status: 'status',
+          intervention:'intervention',
+          location:'location',
+          indication:'indication'
+        },{
+          index: '2.',
+          phase: 'phase',
+          title: 'title',
+          status: 'status',
+          intervention:'intervention',
+          location:'location',
+          indication:'indication'
+        },{
+          index: '3.',
+          phase: 'phase',
+          title: 'title',
+          status: 'status',
+          intervention:'intervention',
+          location:'location',
+          indication:'indication'
+        },{
+          index: '4.',
+          phase: 'phase',
+          title: 'title',
+          status: 'status',
+          intervention:'intervention',
+          location:'location',
+          indication:'indication'
+        }]
+      }
+    },
+    mounted() {
+      
+    },
+    methods:{
+      tabClick(tabLable){
+        console.log(tabLable);
+        console.log(this.tabPosition)
+      },
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
+      }
+    }
+
+  }
+</script>
+
+<style scoped lang="scss">
+.clinicalResult{
+  .width70{
+    width: 70%;
+    margin: 0 auto;
+  }
+  .childTip{
+    color:#101010;
+    font-size:14px;
+    margin-top:50px;
+  }
+  .clinicaltab{
+    margin-top:20px;
+    display: block;
+  }
+  .clinicalBox{
+    background:#fff;
+    margin-top:20px;
+  }
+}
+
+</style>

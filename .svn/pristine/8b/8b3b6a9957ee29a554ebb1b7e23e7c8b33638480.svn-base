@@ -1,0 +1,28 @@
+<template>
+  <div>
+    <div class="moleculeStucture">
+      <ChildBanner></ChildBanner>
+      <!-- 分子搜索页面 -->
+    </div>
+  </div>
+</template>
+
+<script>
+  import ChildBanner from '@/components/ChildBanner'
+  export default {
+    name: "MoleculeStucture",
+    components:{
+      ChildBanner
+    },
+    data() {
+      return {
+      }
+    },
+    mounted() {
+      
+    }
+  }
+</script>
+
+<style scoped lang="scss">
+</style>

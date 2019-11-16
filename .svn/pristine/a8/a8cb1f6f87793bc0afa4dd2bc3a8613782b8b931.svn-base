@@ -1,0 +1,28 @@
+<template>
+  <div>
+    <div class="statisticalChart">
+      <ChildBanner></ChildBanner>
+      <!-- 图形搜索页面 -->
+    </div>
+  </div>
+</template>
+
+<script>
+  import ChildBanner from '@/components/ChildBanner'
+  export default {
+    name: "StatisticalChart",
+    components:{
+      ChildBanner
+    },
+    data() {
+      return {
+      }
+    },
+    mounted() {
+      
+    }
+  }
+</script>
+
+<style scoped lang="scss">
+</style>

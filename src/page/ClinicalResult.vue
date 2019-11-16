@@ -1,0 +1,129 @@
+<template>
+  <div>
+    <div class="clinicalResult">
+      <ChildBanner :show="true" :data='searchinput'></ChildBanner>
+      <!-- 临床搜索页面 -->
+      <div class="childTip width70">Showing {{10}} of {{total}} availiable item</div>
+      <el-radio-group v-model="tabPosition" class="clinicaltab width70" @change="tabClick">
+        <el-radio-button label="Early">Early Phase1</el-radio-button>
+        <el-radio-button label="1">Phase1</el-radio-button>
+        <el-radio-button label="2">Phase2</el-radio-button>
+        <el-radio-button label="3">Phase3</el-radio-button>
+        <el-radio-button label="4">Phase4</el-radio-button>
+        <el-radio-button label="N/A">Not App licable</el-radio-button>
+      </el-radio-group>
+      <div class="clinicalBox width70">
+        <el-table
+          :data="tableData"
+          style="width: 100%">
+          <el-table-column
+            prop="index"
+            width="60px"
+            align="center"
+            label="">
+          </el-table-column>
+          <el-table-column
+            prop="phase"
+            label="Phase">
+          </el-table-column>
+          <el-table-column
+            prop="title"
+            label="Title">
+          </el-table-column>
+          <el-table-column
+            prop="status"
+            label="Status">
+          </el-table-column>
+          <el-table-column
+            prop="intervention"
+            label="Intervention">
+          </el-table-column>
+          <el-table-column
+            prop="location"
+            label="Location">
+          </el-table-column>
+          <el-table-column
+            prop="condation"
+            label="Condation">
+          </el-table-column>
+
+        </el-table>
+        <el-pagination
+          background
+          @current-change="handleCurrentChange"
+          layout="prev, pager, next"
+          :total="total">
+        </el-pagination>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  import ChildBanner from '@/components/ChildBanner'
+  export default {
+    name: "ClinicalResult",
+    components:{
+      ChildBanner
+    },
+    data() {
+      return {
+        searchinput:'',
+        tabPosition: '1',
+        total:50,
+        tableData: [],     
+      }
+    },
+    mounted() {
+      this.searchinput=this.$route.params.id;
+      this.getdata(1,this.searchinput,this.tabPosition);
+    },
+    watch:{
+      $route(){
+        this.searchinput=this.$route.params.id;
+      },
+      searchinput(){
+        this.getdata(1,this.searchinput,this.tabPosition);
+      }
+  },
+    methods:{
+      tabClick(tabLable){
+        this.getdata(1,this.searchinput,this.tabPosition);
+        console.log(tabLable);
+        console.log(this.tabPosition)
+      },
+      getdata(page,sea,phase){this.$axios.get(`http://192.168.1.138:9002/InfoClinical2/?page=${page}&pk1=${sea}&pk2=${phase}`,{
+        }).then(res=>{this.tableData=res.data.results;this.total=res.data.count;
+          console.log(res);
+          console.log(this.tableData)})},    
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`)
+        this.getdata(val,this.searchinput,this.tabPosition);
+      }
+    }
+
+  }
+</script>
+
+<style scoped lang="scss">
+.clinicalResult{
+  .width70{
+    width: 70%;
+    margin: 0 auto;
+  }
+  .childTip{
+    color:#101010;
+    font-size:14px;
+    margin-top:50px;
+  }
+  .clinicaltab{
+    margin-top:20px;
+    display: block;
+  }
+  .clinicalBox{
+    background:#fff;
+    margin-top:20px;
+  }
+}
+
+</style>

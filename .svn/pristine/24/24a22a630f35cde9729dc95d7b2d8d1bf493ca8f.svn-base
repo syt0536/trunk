@@ -1,0 +1,67 @@
+<template>
+  <div>
+    <div class="searchResult">
+    <ChildBanner :show="true" :data='searchinput'></ChildBanner>
+      <div class='content width70'>
+        <Childtable :data='tableData' :meta='meta'></Childtable>
+          <el-pagination
+          background
+          @current-change="handleCurrentChange"
+          layout="prev, pager, next"
+          :total="meta.total_results">
+        </el-pagination>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import ChildBanner from '@/components/ChildBanner'
+import Childtable from '@/components/Childtable'
+export default {
+  name: "SearchResult",
+  components: {
+    ChildBanner,
+    Childtable
+  },
+  data() {
+    return {
+      param:'',
+      meta:{},
+      tableData: [],
+      searchinput:'',
+      expands:[],
+      shuju:[],
+    }
+  },
+  mounted() {
+      this.searchinput=this.$route.params.id;
+      this.getdata(1,this.searchinput);
+  },
+  watch:{
+    $route(){
+      this.searchinput=this.$route.params.id;
+    },
+    searchinput(){
+      this.getdata(1,this.searchinput);
+    }
+  },
+  methods:{
+        getdata(page,sea){this.$axios.get(`http://192.168.1.138:9000/InfoDrug/?search=${sea}&page=${page}`,{
+          }).then(res=>{this.tableData=res.data.info_drugs;this.meta=res.data.meta;
+            console.log(res);})},    
+        handleCurrentChange(val) {
+          console.log(`当前页: ${val}`)
+          this. getdata(val,this.searchinput);
+      }
+  }
+}
+
+</script>
+<style scoped lang="scss">
+.searchResult{
+  .width70{
+    width: 70%;
+    margin: 0 auto;
+  }
+}
+</style>

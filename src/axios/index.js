@@ -1,0 +1,50 @@
+import axios from 'axios'
+import router from "../router"
+import qs from 'qs'
+import { Message } from 'element-ui'
+
+let baseUrl = '';
+
+const install = function(Vue, opts = {}) {
+  axios.defaults.baseURL = baseUrl
+  axios.interceptors.request.use(
+    config => {
+      config.crossDomain = true;
+      config.withCredentials = true;
+      return config;
+    },
+    error => {
+      return Promise.reject(error)
+    }
+  );
+  axios.interceptors.response.use(
+    response => {
+      if (response.data.code == 401) {
+        let from = router.currentRoute.fullPath
+        if (!from.startsWith('/login')) {
+          router.push('/login');
+        }
+        return;
+      } else if (response.data.code == -2) {
+        router.push('/nolicense');
+      }
+      return response;
+    },
+    error => {
+      if (error.response) {
+        console.log(error.response);
+      } else {
+        Message({type:'error', message:"请求失败，请检查接口服务是否启用", showClose:true})
+      }
+    }
+  )
+
+  Vue.prototype.$axios = axios
+  Vue.prototype.$qs = qs
+}
+
+export default {
+  install,
+  axios,
+  qs
+}

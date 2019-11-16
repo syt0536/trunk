@@ -1,0 +1,5 @@
+.input .el-input__inner{
+	background:#A1ECD9 100%;
+	border:1px solid #FBFBFB;
+	color:#fff;
+}

@@ -1,0 +1,74 @@
+<template>
+  <div>
+    <div class="searchResult">
+      <ChildBanner :show="true"></ChildBanner>
+      <div class='content width70'>
+        <Childtable :data="tableData" :total="total"></Childtable>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import ChildBanner from '@/components/ChildBanner'
+import Childtable from '@/components/Childtable'
+export default {
+  name: "SearchResult",
+  components: {
+    ChildBanner,
+    Childtable
+  },
+  data() {
+    return {
+      total:50,
+      tableData: [{
+        index: '1.',
+        DrugName: 'DrugName',
+        Indication: 'Indication',
+        Target: 'Target',
+        Intervention: 'Intervention',
+        Status: 'Status',
+        Company: 'Company',
+        shopId: 'shopId',
+        Paper: 'Paper'
+      },{
+        index: '2.',
+        DrugName: 'DrugName',
+        Indication: 'Indication',
+        Target: 'Target',
+        Intervention: 'Intervention',
+        Status: 'Status',
+        Company: 'Company',
+        shopId: 'shopId',
+        Paper: 'Paper'
+      },{
+        index: '3.',
+        DrugName: 'DrugName',
+        Indication: 'Indication',
+        Target: 'Target',
+        Intervention: 'Intervention',
+        Status: 'Status',
+        Company: 'Company',
+        shopId: 'shopId',
+        Paper: 'Paper'
+      }]
+    }
+
+
+  },
+  mounted() {
+
+  },
+  methods:{
+     
+  }
+}
+
+</script>
+<style scoped lang="scss">
+.searchResult{
+  .width70{
+    width: 70%;
+    margin: 0 auto;
+  }
+}
+</style>

@@ -1,0 +1,25 @@
+<template>
+  <div>
+    <div class="login">
+      login
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: "Login",
+    components:{
+    },
+    data() {
+      return {
+      }
+    },
+    mounted() {
+      
+    }
+  }
+</script>
+
+<style scoped lang="scss">
+</style>
